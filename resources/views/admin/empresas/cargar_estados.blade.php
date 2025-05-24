@@ -1,5 +1,5 @@
-<select name="" id="" class="form-control">
+<select name="departamento" id="select_estado" class="form-control">
    @foreach($estados as $estado)
- <option value="{{$estado->name}}">{{$estado->name}}</option>
+ <option value="{{$estado->id}}">{{$estado->name}}</option>
    @endforeach 
 </select>

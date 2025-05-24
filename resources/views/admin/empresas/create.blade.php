@@ -45,12 +45,13 @@
 
             {{-- Card Body --}}
             <div class="card-body {{ $authType }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                <form action="">
+                <form action="{{url('crear-empresa/create')}}"method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="logo" >Logo</label>
-                                <input type="file" id="file" name="logo" class="form-control" >
+                                <input type="file" id="file" name="logo" class="form-control" required>
                                 <br>
                                 <center><output id="list"></output></center>
                                 <script>
@@ -83,7 +84,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="pais">Pais</label>
-                                        <select name="" id="select_pais" class="form-control">
+                                        <select name="pais" id="select_pais" class="form-control">
                                             @foreach($paises as $paise)
                                             <option value="{{$paise->id}}">{{$paise->name}}</option>
                                             @endforeach 
@@ -102,67 +103,69 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="ciudad">Ciudad</label>
-                                       <input type="text"class="form-control">
+                                       <div id="respuesta_estado">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nombre_empresa">Nombre de la Empresa</label>
-                                       <input type="text"class="form-control">
+                                       <input type="text" name="nombre_empresa" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="tipo_empresa">Tipo de la Empresa</label>
-                                       <input type="text"class="form-control">
+                                       <input type="text" name="tipo_empresa" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nit">NIT</label>
-                                        <input type="text"class="form-control">
+                                        <input type="text" name="nit" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="moneda">Moneda</label>
-                                       <select name="" id="" class="form-control">
+                                       <select name="moneda" id="" class="form-control">
                                             @foreach($monedas as $moneda)
                                             <option value="{{$moneda->symbol}}">{{$moneda->symbol}}</option>
                                             @endforeach 
                                         </select>
                                     </div>
                                 </div>
-                             </div>
-                               <div class="row">
+                            </div>
+                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nombre_impuesto">Nombre del Impuesto</label>
-                                       <input type="text"class="form-control">
+                                       <input type="text" name="nombre_impuesto" class="form-control" required>
                                     </div>
                                 </div>  
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="cantidad_impuesto">cantidad</label>
-                                        <input type="number"class="form-control">
+                                        <input type="number" name="cantidad_impuesto" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="correo">Correo de la Empresa</label>
-                                       <input type="email"class="form-control">
+                                       <input type="email" name="correo" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="telefono">Telefono de la Empresa</label>
-                                       <input type="text"class="form-control">
+                                       <input type="text" name="telefono" class="form-control" required>
                                     </div>
                                 </div>
-                                </div>
-                                <div class="row">
+                            </div>
+                            <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="direccion">Direccion</label>
@@ -174,12 +177,18 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="codigo_postal">Codigo Postal</label>
-                                         <select name="" id="" class="form-control">
+                                         <select name="codigo_postal" id="" class="form-control">
                                             @foreach($paises as $paise)
                                             <option value="{{$paise->phone_code}}">{{$paise->phone_code}}</option>
                                             @endforeach 
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block ">Crear Empresa</button>
                                 </div>
                             </div>
                         </div>
@@ -295,7 +304,7 @@
         //  alert(id_pais);
             if(id_pais){
             $.ajax({
-                url:"{{url('/crear-empresa/')}}"+'/'+id_pais,
+                url:"{{url('/crear-empresa/pais/')}}"+'/'+id_pais,
                 type: "GET",
                 success:function(data){
                     $('#respuesta_pais').html(data);
@@ -305,6 +314,25 @@
             alert('Debe selecionar un pais');
          }
          });
+     </script>
+
+     <script>
+        $(document).on('change','#select_estado',function(){
+            var id_estado = $(this).val();
+            // alert(id_estado);
+            if(id_estado){
+            $.ajax({
+                url:"{{url('/crear-empresa/estado/')}}"+'/'+id_estado,
+                type: "GET",
+                success:function(data){
+                    $('#respuesta_estado').html(data);
+                }
+            });
+         }else{
+            alert('Debe selecionar un Departamento');
+         }
+        });
+         
      </script>
 
 @stop
