@@ -45,13 +45,16 @@
 
             {{-- Card Body --}}
             <div class="card-body {{ $authType }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                <form action="{{url('crear-empresa/create')}}"method="post">
+                <form action="{{url('crear-empresa/create')}}"method="post" enctype="multipart/form-data" >
                     @csrf
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="logo" >Logo</label>
-                                <input type="file" id="file" name="logo" class="form-control" required>
+                                <input type="file" id="file" name="logo" accept=".jpg, .jpeg, .png" class="form-control" required>
+                                @error('logo')
+                                <small style="color:red ">{{$message}}</small>
+                                @enderror
                                 <br>
                                 <center><output id="list"></output></center>
                                 <script>
@@ -113,19 +116,28 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nombre_empresa">Nombre de la Empresa</label>
-                                       <input type="text" name="nombre_empresa" class="form-control" required>
+                                       <input type="text" value="{{old('nombre_empresa')}}" name="nombre_empresa" class="form-control" required>
+                                       @error('nombre_empresa')
+                                       <small style="color:red;">{{$message}}</small>
+                                       @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="tipo_empresa">Tipo de la Empresa</label>
-                                       <input type="text" name="tipo_empresa" class="form-control" required>
+                                       <input type="text" value="{{old('tipo_empresa')}}" name="tipo_empresa" class="form-control" required>
+                                       @error('tipo_empresa')
+                                       <small style="color:red;">{{$message}}</small>
+                                       @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nit">NIT</label>
-                                        <input type="text" name="nit" class="form-control" required>
+                                        <input type="text" name="nit" value="{{old('nit')}}" class="form-control" required>
+                                        @error('nit')
+                                        <small style="color:red;">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -143,25 +155,37 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nombre_impuesto">Nombre del Impuesto</label>
-                                       <input type="text" name="nombre_impuesto" class="form-control" required>
+                                       <input type="text" name="nombre_impuesto" value="{{old('nombre_impuesto')}}" class="form-control" required>
+                                        @error('nombre_impuesto')
+                                        <small style="color:red;">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>  
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="cantidad_impuesto">cantidad</label>
-                                        <input type="number" name="cantidad_impuesto" class="form-control" required>
+                                        <input type="number" name="cantidad_impuesto" value="{{old('cantidad_impuesto')}}" class="form-control" required>
+                                        @error('cantidad_impuesto')
+                                        <small style="color:red;">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="correo">Correo de la Empresa</label>
-                                       <input type="email" name="correo" class="form-control" required>
+                                       <input type="email" name="correo" value="{{old('correo')}}" class="form-control" required>
+                                        @error('correo')
+                                        <small style="color:red;">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="telefono">Telefono de la Empresa</label>
-                                       <input type="text" name="telefono" class="form-control" required>
+                                       <input type="text" name="telefono" value="{{old('telefono')}}" class="form-control" required>
+                                        @error('telefono')
+                                        <small style="color:red;">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +193,10 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="direccion">Direccion</label>
-                                        <input id="pac-input" class="form-control" name="direccion" type="text" placeholder="Buscar..." required>
+                                        <input id="pac-input" class="form-control" value="{{old('direccion')}}" name="direccion" type="text" placeholder="Buscar..." required>
+                                        @error('direccion')
+                                        <small style="color:red;">{{$message}}</small>
+                                        @enderror
                                         <br>
                                          <div id="map" style="width: 100%;height: 400px"></div>
                                     </div>

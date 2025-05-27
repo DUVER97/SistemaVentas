@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use App\Models\User;
+// use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmpresaController extends Controller
 {
@@ -51,8 +56,53 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $datos = $request->all();
-        return response()->json($datos);
+        // $datos = $request->all();
+        // return response()->json($datos);
+            $request->validate([
+                'nombre_empresa'=>'required',
+                'tipo_empresa'=>'required',
+                'nit'=>'required|unique:empresas',
+                'telefono'=>'required',
+                'correo'=>'required|unique:empresas',
+                'cantidad_impuesto'=>'required',
+                'nombre_impuesto'=>'required',
+                'direccion'=>'required',
+                'logo'=>'required|image|mimes:jpg,jpeg,png',
+            ]);
+
+            $empresa = new Empresa();
+
+            $empresa->pais = $request->pais;
+            $empresa->nombre_empresa = $request->nombre_empresa;
+            $empresa->tipo_empresa = $request->tipo_empresa;
+            $empresa->nit = $request->nit;
+            $empresa->telefono = $request->telefono;
+            $empresa->correo = $request->correo;
+            $empresa->cantidad_impuesto = $request->cantidad_impuesto;
+            $empresa->nombre_impuesto = $request->nombre_impuesto;
+            $empresa->moneda = $request->moneda;
+            $empresa->direccion = $request->direccion;
+            $empresa->ciudad = $request->ciudad;
+            $empresa->departamento = $request->departamento;
+            $empresa->codigo_postal = $request->codigo_postal;
+            $empresa->logo = $request->file('logo')->store('logos','public');
+
+            $empresa->save();
+
+            $usuario = new User();
+            $usuario->name = "Admin";
+            $usuario->email = $request->correo;
+            $usuario->password = Hash::make($request['nit']);
+            $usuario->empresa_id = $empresa->id;
+            $usuario->save();
+
+            Auth::login($usuario);
+
+
+
+            return redirect()->route('admin.index')
+            ->with('mensaje','se registro la empresa de la manera correcta');
+
     }
 
     /**
@@ -68,7 +118,7 @@ class EmpresaController extends Controller
      */
     public function edit(Empresa $empresa)
     {
-        //
+        return view('admin.configuraciones.edit');
     }
 
     /**
