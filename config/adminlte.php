@@ -337,6 +337,7 @@ return [
             'text' => 'Configuracion',
             'url' => 'admin/configuracion',
             'icon' => 'fas fa-fw fa-gear',
+            'classes' =>'bg-blue text-white'
         ],
         [
             'text' => 'multilevel',

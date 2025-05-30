@@ -118,7 +118,15 @@ class EmpresaController extends Controller
      */
     public function edit(Empresa $empresa)
     {
-        return view('admin.configuraciones.edit');
+        $paises = DB::table('countries')->get();
+        $estados = DB::table('states')->get();
+        // $ciudades = DB::table('cities')->get();
+        $monedas = DB::table('currencies')->get();
+        $empresa_id = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id',$empresa_id)->first();
+        $departamentos = DB::table('states')->where('country_id',$empresa->pais)->get();
+        $ciudades = DB::table('cities')->where('state_id',$empresa->departamento)->get();
+        return view('admin.configuraciones.edit',compact('paises','estados','monedas','empresa','departamentos','ciudades'));
     }
 
     /**

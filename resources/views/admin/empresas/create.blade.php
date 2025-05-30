@@ -26,38 +26,39 @@
 
 @section('body')
     <div class="container">
-<br>
-<center> <img src="{{asset('/images/logoHidu.jpg')}}"width="20%" alt=""> 
-</center>
-<br>
+        <br>
+        <center> <img src="{{asset('/images/hidu.png')}}"width="20%" alt=""> 
+        </center>
+        <br>
     
-       
+        <div class="row">
+            <div class="col-md-12">
                 {{-- Card Box --}}
                 <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}"
                     style="box-shadow: 5px 5px 5px 5px #FF2ED3">
                  
-                <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
-                    <h3 class="card-title float-none text-center">
-                        <b>Registro de una nueva empresa</b>
-                    </h3>
-                </div>
+                    <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
+                        <h3 class="card-title float-none text-center">
+                            <b>Registro de una nueva empresa</b>
+                        </h3>
+                    </div>
            
 
-            {{-- Card Body --}}
-            <div class="card-body {{ $authType }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                <form action="{{url('crear-empresa/create')}}"method="post" enctype="multipart/form-data" >
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="logo" >Logo</label>
-                                <input type="file" id="file" name="logo" accept=".jpg, .jpeg, .png" class="form-control" required>
-                                @error('logo')
-                                <small style="color:red ">{{$message}}</small>
-                                @enderror
-                                <br>
-                                <center><output id="list"></output></center>
-                                <script>
+                    {{-- Card Body --}}
+                    <div class="card-body {{ $auth_Type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
+                        <form action="{{url('crear-empresa/create')}}"method="post" enctype="multipart/form-data" >
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="logo" >Logo</label>
+                                        <input type="file" id="file" name="logo" accept=".jpg, .jpeg, .png" class="form-control" required>
+                                        @error('logo')
+                                        <small style="color:red ">{{$message}}</small>
+                                        @enderror
+                                        <br>
+                                        <center><output id="list"></output></center>
+                                        <script>
                                             function archivo(evt){
                                                var files = evt.target.files; //file List objet
                                                //Obtenemos la imagen del campo "file"
@@ -206,7 +207,7 @@
                                         <label for="codigo_postal">Codigo Postal</label>
                                          <select name="codigo_postal" id="" class="form-control">
                                             @foreach($paises as $paise)
-                                            <option value="{{$paise->phone_code}}">{{$paise->phone_code}}</option>
+                                                <option value="{{$paise->phone_code}}">{{$paise->phone_code}}</option>
                                             @endforeach 
                                         </select>
                                     </div>
@@ -220,16 +221,17 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                    </form>
+                    </div>
 
-            {{-- Card Footer --}}
-            @hasSection('auth_footer')
-                <div class="card-footer {{ config('adminlte.classes_auth_footer', '') }}">
-                    @yield('auth_footer')
+                    {{-- Card Footer --}}
+                    @hasSection('auth_footer')
+                        <div class="card-footer {{ config('adminlte.classes_auth_footer', '') }}">
+                            @yield('auth_footer')
+                        </div>
+                    @endif
                 </div>
-            @endif
-
+            </div>
         </div>
 
     </div>
