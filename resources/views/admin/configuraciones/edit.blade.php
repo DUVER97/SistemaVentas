@@ -21,13 +21,14 @@
 
                     {{-- Card Body --}}
                     <div class="card-body {{ $auth_Type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                        <form action="{{url('crear-empresa/create')}}"method="post" enctype="multipart/form-data" >
+                        <form action="{{url('/admin/configuracion',$empresa->id)}}"method="post" enctype="multipart/form-data" >
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="logo" >Logo</label>
-                                        <input type="file" id="file" name="logo" accept=".jpg, .jpeg, .png" class="form-control" required>
+                                        <input type="file" id="file" name="logo" accept=".jpg, .jpeg, .png" class="form-control">
                                         @error('logo')
                                         <small style="color:red ">{{$message}}</small>
                                         @enderror
@@ -78,7 +79,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="estado">Departamento/Estado</label>
-                                        <select name="departamento" id="select_departamento" class="form-control">
+                                        <select name="departamento" id="select_departamento_2" class="form-control">
                                             @foreach($departamentos as $departamento)
                                             <option value="{{$departamento->id}}"{{$empresa->departamento == $departamento->id ? 'selected':''}} >{{$departamento->name}}</option>
                                             @endforeach 
@@ -91,7 +92,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="ciudad">Ciudad</label>
-                                        <select name="ciudades" id="select_ciudades" class="form-control">
+                                        <select name="ciudad" id="select_ciudad_2" class="form-control">
                                             @foreach($ciudades as $ciudade)
                                             <option value="{{$ciudade->id}}"{{$empresa->ciudad == $ciudade->id ? 'selected':''}} >{{$ciudade->name}}</option>
                                             @endforeach 
@@ -135,7 +136,7 @@
                                         <label for="moneda">Moneda</label>
                                        <select name="moneda" id="" class="form-control">
                                             @foreach($monedas as $moneda)
-                                            <option value="{{$moneda->symbol}}">{{$moneda->symbol}}</option>
+                                            <option value="{{$moneda->id}}" {{$empresa->moneda == $moneda->id ? 'selected':''}}>{{$moneda->symbol}}</option>
                                             @endforeach 
                                         </select>
                                     </div>
@@ -194,7 +195,7 @@
                                         <label for="codigo_postal">Codigo Postal</label>
                                          <select name="codigo_postal" id="" class="form-control">
                                             @foreach($paises as $paise)
-                                                <option value="{{$paise->phone_code}}">{{$paise->phone_code}}</option>
+                                                <option value="{{$paise->phone_code}}"{{$empresa->codigo_postal == $paise->phone_code ? 'selected':''}} >{{$paise->phone_code}}</option>
                                             @endforeach 
                                         </select>
                                     </div>
@@ -227,5 +228,43 @@
 @stop
 
 @section('js')
+<script>
+         $('#select_pais').on('change',function () {
+         var id_pais = $('#select_pais').val();
+        //  alert(id_pais);
+            if(id_pais){
+            $.ajax({
+                url:"{{url('/admin/configuracion/pais/')}}"+'/'+id_pais,
+                type: "GET",
+                success:function(data){
+                    $('#select_departamento_2').css('display','none');
+                    $('#respuesta_pais').html(data);
+                }
+            });
+         }else{
+            alert('Debe selecionar un pais');
+         }
+         });
+     </script>
+
+     <script>
+        $(document).on('change','#select_estado',function(){
+            var id_estado = $(this).val();
+            // alert(id_estado);
+            if(id_estado){
+            $.ajax({
+                url:"{{url('/admin/configuracion/estado/')}}"+'/'+id_estado,
+                type: "GET",
+                success:function(data){
+                    $('#select_ciudad_2').css('display','none');
+                    $('#respuesta_estado').html(data);
+                }
+            });
+         }else{
+            alert('Debe selecionar un Departamento');
+         }
+        });
+         
+     </script>
     
 @stop
