@@ -340,6 +340,17 @@ return [
             'classes' =>'bg-blue text-white'
         ],
         [
+            'text' => 'Roles',
+            'icon' => 'fas fa-fw fa-user-check',
+            'classes' =>'bg-blue text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de roles',
+                    'url' => 'admin/roles',
+                ],
+            ],
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
