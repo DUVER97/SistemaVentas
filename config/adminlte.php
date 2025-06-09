@@ -157,7 +157,7 @@ return [
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
-    'layout_dark_mode' => true,
+    'layout_dark_mode' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -337,57 +337,21 @@ return [
             'text' => 'Configuracion',
             'url' => 'admin/configuracion',
             'icon' => 'fas fa-fw fa-gear',
-            'classes' =>'bg-blue text-white'
+            'classes' =>'bg-black text-white'
         ],
         [
             'text' => 'Roles',
             'icon' => 'fas fa-fw fa-user-check',
-            'classes' =>'bg-blue text-white',
+            'classes' =>'bg-black text-white',
             'submenu' => [
                 [
                     'text' => 'Listado de roles',
                     'url' => 'admin/roles',
+                    'classes' =>'bg-white text-black',
                 ],
             ],
         ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
+        
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',

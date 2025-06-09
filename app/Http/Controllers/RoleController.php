@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -11,7 +12,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.roles.index');
+        $roles = Role::all();
+        return view('admin.roles.index',compact('roles'));
     }
 
     /**
@@ -19,7 +21,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -27,7 +29,25 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $datos = $request->all();
+        // return response()->json($datos);
+
+        $request->validate([
+                
+                'name'=>'required|unique:roles',
+        
+            ]);
+
+            $rol = new Role();
+
+            $rol->name = $request->name;
+            $rol->guard_name = "web";
+ 
+            $rol->save();
+
+            return redirect()->route('admin.roles.index')
+            ->with('mensaje','Se registro el rol correctamente')
+            ->with('icono','success');
     }
 
     /**
