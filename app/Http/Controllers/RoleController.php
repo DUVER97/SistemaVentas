@@ -53,32 +53,56 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $role = Role::find($id);
+        return view('admin.roles.show',compact('role'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+          $role = Role::find($id);
+        return view('admin.roles.edit',compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
-        //
+        // $datos = $request->all();
+        // return response()->json($datos);
+
+        $request->validate([
+                
+                'name'=>'required|unique:roles,name,'.$id,
+        
+            ]);
+
+            $rol = Role::find($id);
+
+            $rol->name = $request->name;
+            $rol->guard_name = "web";
+ 
+            $rol->save();
+
+            return redirect()->route('admin.roles.index')
+            ->with('mensaje','Se modifico el rol correctamente')
+            ->with('icono','success');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        Role::destroy($id);
+        return redirect()->route('admin.roles.index')
+            ->with('mensaje','Se Elimino el rol correctamente')
+            ->with('icono','success');
     }
 }

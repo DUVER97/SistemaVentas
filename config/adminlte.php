@@ -351,7 +351,18 @@ return [
                 ],
             ],
         ],
-        
+        [
+            'text' => 'Usuarios',
+            'icon' => 'fas fa-fw fa-users',
+            'classes' =>'bg-black text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de usuarios',
+                    'url' => 'admin/usuarios',
+                    'classes' =>'bg-white text-black',
+                ],
+            ],
+        ],
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',
