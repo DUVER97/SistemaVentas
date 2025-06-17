@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
+
 class UsuarioController extends Controller
 {
     /**
@@ -63,32 +64,64 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+       $usuario = User::find($id);
+       return view('admin.usuarios.show',compact('usuario'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+        $roles = Role::all();
+       return view('admin.usuarios.edit',compact('usuario','roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
-        //
+        // $datos = $request->all();
+        // return response()->json($datos);
+
+        $request->validate([
+                'name'=>'required',
+                'email'=>'required|unique:users,email,'.$id,
+        ]);
+
+         $usuario = User::find($id);
+
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        if($request->filled('password')){
+            $usuario->password = Hash::make($request->password);
+        }
+        $usuario->empresa_id = Auth::user()->empresa_id;
+
+         $usuario->save();
+
+        $usuario->syncRoles($request->role);
+
+        return redirect()->route('admin.usuarios.index')
+            ->with('mensaje','Se modifico el usuario correctamente')
+            ->with('icono','success');
+
+        
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('admin.usuarios.index')
+            ->with('mensaje','Se Elimino el usuario correctamente')
+            ->with('icono','success');
     }
 }

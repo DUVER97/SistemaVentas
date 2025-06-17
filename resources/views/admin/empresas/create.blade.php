@@ -27,7 +27,7 @@
 @section('body')
     <div class="container">
         <br>
-        <center> <img src="{{asset('/images/hidu.png')}}"width="20%" alt=""> 
+        <center> <img src="{{asset('/images/login.png')}}"width="20%" alt=""> 
         </center>
         <br>
     
@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 {{-- Card Box --}}
                 <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}"
-                    style="box-shadow: 5px 5px 5px 5px #FF2ED3">
+                    style="box-shadow: 5px 5px 5px 5px #46C9F9">
                  
                     <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
                         <h3 class="card-title float-none text-center">

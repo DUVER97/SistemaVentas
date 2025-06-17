@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-9">
             <div class="card card-outline card-primary">
               <div class="card-header">
                     <h3 class="card-title">Usuarios Registrados</h3>
@@ -21,6 +21,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" style="text-align: center">Nro</th>
+                                <th scope="col" style="text-align: center">Rol del Usuario</th>
                                 <th scope="col" style="text-align: center">Nombre del Usuario</th>
                                 <th scope="col" style="text-align: center">Email</th>
                                 <th scope="col" style="text-align: center">acciones</th>
@@ -31,6 +32,7 @@
                         @foreach($usuarios as $usuario)
                             <tr>
                                 <td style="text-align:center">{{$contador++}}</td>
+                                <td style="text-align:center">{{$usuario->roles->pluck('name')->implode(', ')}}</td>
                                 <td style="text-align:center">{{$usuario->name}}</td>
                                 <td style="text-align:center">{{$usuario->email}}</td>
                                 <td style="text-align:center">
@@ -47,8 +49,8 @@
                                             function preguntar{{$usuario->id}} (event) {
                                                 event.preventDefault();
                                                 Swal.fire({
-                                                    title: '¿Estás seguro de eliminar este rol?',
-                                                    text: 'No podrás recuperar este rol una vez eliminado',
+                                                    title: '¿Estás seguro de eliminar este Usuario?',
+                                                    text: 'No podrás recuperar este usuario una vez eliminado',
                                                     icon: 'warning',
                                                     showCancelButton: true,
                                                     confirmButtonText: 'Eliminar',
