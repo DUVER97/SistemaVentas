@@ -363,6 +363,20 @@ return [
                 ],
             ],
         ],
+
+         [
+            'text' => 'Categorias',
+            'icon' => 'fas fa-fw fa-tags',
+            'classes' =>'bg-black text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de categorias',
+                    'url' => 'admin/categorias',
+                    'classes' =>'bg-white text-black',
+                ],
+            ],
+        ],
+
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',
