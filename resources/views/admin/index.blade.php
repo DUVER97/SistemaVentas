@@ -30,6 +30,18 @@
               </div>
             </div>
         </div>
+
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box zoomP">
+              <a href="{{url('/admin/categorias')}}" class="info-box-icon bg-success">
+                <span class=""><i class="fas fa-tags"></i></span>
+              </a>
+              <div class="info-box-content">
+                <span class="info-box-text">Categorias Registradas</span>
+                <span class="info-box-number">{{$total_categorias}} categorias</span>
+              </div>
+            </div>
+        </div>
     </div>
 @stop
 

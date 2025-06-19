@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriaController extends Controller
 {
@@ -21,7 +22,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categorias.create');
     }
 
     /**
@@ -29,38 +30,79 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $datos = $request->all();
+        // return response()->json($datos);
+
+        $request->validate([
+                'nombre'=>'required|unique:categorias',
+                'descripcion'=>'required',
+            ]);
+
+        $categoria = new Categoria();
+
+        $categoria->nombre = $request->nombre;
+        $categoria->descripcion = $request->descripcion;
+        $categoria->empresa_id = Auth::user()->empresa_id;
+
+        $categoria->save();
+
+        return redirect()->route('admin.categorias.index')
+            ->with('mensaje','Se Registro la categoria correctamente')
+            ->with('icono','success');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Categoria $categoria)
+    public function show($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        return view('admin.categorias.show',compact('categoria'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categoria $categoria)
+    public function edit($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        return view('admin.categorias.edit',compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, $id)
     {
-        //
+        // $datos = $request->all();
+        // return response()->json($datos);
+
+        $request->validate([
+            'nombre'=>'required|unique:categorias,nombre,'.$id,
+            'descripcion'=>'required',
+        ]);
+
+        $categoria = Categoria::find($id);
+
+        $categoria->nombre = $request->nombre;
+        $categoria->descripcion = $request->descripcion;
+        $categoria->empresa_id = Auth::user()->empresa_id;
+
+        $categoria->save();
+
+        return redirect()->route('admin.categorias.index')
+            ->with('mensaje','Se Actualizo la categoria correctamente')
+            ->with('icono','success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy( $id)
     {
-        //
+         Categoria::destroy($id);
+        return redirect()->route('admin.categorias.index')
+            ->with('mensaje','Se Elimino la categoria correctamente')
+            ->with('icono','success');
     }
 }
