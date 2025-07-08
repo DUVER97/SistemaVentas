@@ -16,7 +16,7 @@ class AdminController extends Controller
         $total_usuarios = User::count();
         $total_categorias = Categoria::count();
 
-        $empresa_id = Auth::user()->empresa_id;
+        $empresa_id = Auth::check() ? Auth::user()->empresa_id : redirect()->route('login')->send();
         $empresa = Empresa::where('id',$empresa_id)->first();
         return view('admin.index', compact('empresa','total_roles','total_usuarios','total_categorias'));
     }

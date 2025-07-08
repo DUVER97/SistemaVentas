@@ -22,7 +22,7 @@
                                     <label for="role">Nombre del Categoria</label>
                                     <input type="text" class="form-control"value="{{$categoria->nombre}}" name="nombre" required >
                                     @error('nombre')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                                     <label for="descripcion">Descripcion</label>
                                     <input type="text" class="form-control"value="{{$categoria->descripcion}}" name="descripcion" required >
                                     @error('descripcion')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>

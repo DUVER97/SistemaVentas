@@ -18,10 +18,10 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="role">Nombre del Categoria</label>
+                                    <label for="role">Nombre de la Categoria</label>
                                     <input type="text" class="form-control"value="{{old('nombre')}}" name="nombre" required >
                                     @error('nombre')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
                                     <label for="descripcion">Descripcion</label>
                                     <input type="text" class="form-control"value="{{old('descripcion')}}" name="descripcion" required >
                                     @error('descripcion')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>

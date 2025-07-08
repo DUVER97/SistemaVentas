@@ -54,7 +54,7 @@
                                         <label for="logo" >Logo</label>
                                         <input type="file" id="file" name="logo" accept=".jpg, .jpeg, .png" class="form-control" required>
                                         @error('logo')
-                                        <small style="color:red ">{{$message}}</small>
+                                        <small style="color:red; ">{{$message}}</small>
                                         @enderror
                                         <br>
                                         <center><output id="list"></output></center>
@@ -71,7 +71,7 @@
                                                   reader.onload = (function (theFile){
                                                     return function (e) {
                                                         //insertamos la imagen
-                                                        document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="',e.target.result,'" widtch="70%" title="',escape(theFile.name),'"/>'].join('');
+                                                        document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="',e.target.result,'" width="70%" title="',escape(theFile.name),'"/>'].join('');
                                                     };
                                                   })(f);
                                                   reader.readAsDataURL(f);

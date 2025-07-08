@@ -22,7 +22,7 @@
                                     <label for="name">Nombre del rol</label>
                                     <input type="text" class="form-control"value="{{$role->name}}" name="name" required >
                                     @error('name')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>

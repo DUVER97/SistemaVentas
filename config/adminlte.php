@@ -364,7 +364,7 @@ return [
             ],
         ],
 
-         [
+        [
             'text' => 'Categorias',
             'icon' => 'fas fa-fw fa-tags',
             'classes' =>'bg-black text-white',
@@ -372,6 +372,19 @@ return [
                 [
                     'text' => 'Listado de categorias',
                     'url' => 'admin/categorias',
+                    'classes' =>'bg-white text-black',
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Productos',
+            'icon' => 'fas fa-fw fa-list',
+            'classes' =>'bg-black text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de productos',
+                    'url' => 'admin/productos',
                     'classes' =>'bg-white text-black',
                 ],
             ],

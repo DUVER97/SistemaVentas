@@ -32,7 +32,7 @@
                                     <label for="name">Nombre del Usuario</label>
                                     <input type="text" class="form-control"value="{{$usuario->name}}" name="name" required >
                                     @error('name')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control"value="{{$usuario->email}}" name="email" required >
                                     @error('email')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control"value="{{old('password')}}" name="password" >
                                     @error('password')
-                                    <small style="">{{$message}}</small>
+                                    <small style="color:red;">{{$message}}</small>
                                     @enderror
                                 </div>
                             </div>
