@@ -48,7 +48,7 @@
                                                 event.preventDefault();
                                                 Swal.fire({
                                                     title: '¿Estás seguro de eliminar esta Categoria?',
-                                                    text: 'No podrás recuperar esta categoria una vez eliminado',
+                                                    text: 'No podrás recuperar esta categoria una vez eliminada y se eliminaran los productos que pertenecen a esta categoria',
                                                     icon: 'warning',
                                                     showCancelButton: true,
                                                     confirmButtonText: 'Eliminar',

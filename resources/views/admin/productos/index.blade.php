@@ -21,12 +21,14 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" style="text-align: center">Nro</th>
+                                <th scope="col" style="text-align: center">Categoria</th>
                                 <th scope="col" style="text-align: center">Codigo</th>
                                 <th scope="col" style="text-align: center">Nombre</th>
                                 <th scope="col" style="text-align: center">Descripcion</th>
                                 <th scope="col" style="text-align: center">stock</th>
                                 <th scope="col" style="text-align: center">Precio de Compra</th>
                                 <th scope="col" style="text-align: center">Precio de Venta</th>
+                                <th scope="col" style="text-align: center">Imagen</th>
                                 <th scope="col" style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
@@ -34,10 +36,16 @@
                         <?php $contador = 1; ?>
                         @foreach($productos as $producto)
                             <tr>
-                                <td style="text-align:center">{{$contador++}}</td>
-                                <td style="text-align:center">{{$producto->codigo}}</td>
-                                <td style="text-align:center">{{$producto->nombre}}</td>
-                                <td style="text-align:center">
+                                <td style="text-align:center;vertical-align: middle">{{$contador++}}</td>
+                                <td style="text-align:center;vertical-align: middle">{{$producto->categoria->nombre}}</td>
+                                <td style="text-align:center;vertical-align: middle">{{$producto->codigo}}</td>
+                                <td style="text-align:center;vertical-align: middle">{{$producto->nombre}}</td>
+                                <td style="text-align:center;vertical-align: middle">{{$producto->descripcion}}</td>
+                                <td style="text-align:center;vertical-align: middle; background-color:blanchedalmond ">{{$producto->stock}}</td>
+                                <td style="text-align:center;vertical-align: middle">{{$producto->precio_compra}}</td>
+                                <td style="text-align:center;vertical-align: middle">{{$producto->precio_venta}}</td>
+                                <td style="text-align:center;vertical-align: middle"><img src="{{asset('storage/'.$producto->imagen)}}" width="80px" alt="imagen"></td>
+                                <td style="text-align:center;vertical-align: middle">
                                     <div class="btn-group" usuario="group" aria-label="Basic example">
                                         <a href="{{url('/admin/productos',$producto->id)}}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                         <a href="{{url('/admin/productos/'.$producto->id.'/edit')}}"" class="btn btn-success btn-sm"><i class="fas fa-pencil"></i></a>
