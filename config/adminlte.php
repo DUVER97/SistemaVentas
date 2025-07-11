@@ -347,7 +347,7 @@ return [
                 [
                     'text' => 'Listado de roles',
                     'url' => 'admin/roles',
-                    'classes' =>'bg-white text-black',
+                    'classes' =>'bg-light text-dark',
                 ],
             ],
         ],
@@ -359,7 +359,7 @@ return [
                 [
                     'text' => 'Listado de usuarios',
                     'url' => 'admin/usuarios',
-                    'classes' =>'bg-white text-black',
+                    'classes' =>'bg-light text-dark',
                 ],
             ],
         ],
@@ -372,7 +372,7 @@ return [
                 [
                     'text' => 'Listado de categorias',
                     'url' => 'admin/categorias',
-                    'classes' =>'bg-white text-black',
+                    'classes' =>'bg-light text-dark',
                 ],
             ],
         ],
@@ -385,7 +385,20 @@ return [
                 [
                     'text' => 'Listado de productos',
                     'url' => 'admin/productos',
-                    'classes' =>'bg-white text-black',
+                    'classes' =>'bg-light text-dark',
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Proveedores',
+            'icon' => 'fas fa-fw fa-list',
+            'classes' =>'bg-black text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de proveedores',
+                    'url' => 'admin/proveedores',
+                    'classes' =>'bg-light text-dark',
                 ],
             ],
         ],
