@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover table-sm">
+                    <table id="mitabla" class="table table-striped table-bordered table-hover table-sm">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" style="text-align: center">Nro</th>
@@ -82,5 +82,30 @@
 @stop
 
 @section('js')
-    
+    <script>
+        $('#mitabla').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay informacion",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
+                "infoFiltered": "(filtrado de _MAX_ Usuarios totales)",
+                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": activar para ordenar la columna ascendente",
+                    "sortDescending": ": activar para ordenar la columna descendente"
+                }
+            }
+        });
+    </script>
 @stop
