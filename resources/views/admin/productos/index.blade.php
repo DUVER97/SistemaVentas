@@ -42,8 +42,8 @@
                                 <td style="text-align:center;vertical-align: middle">{{$producto->nombre}}</td>
                                 <td style="text-align:center;vertical-align: middle">{{$producto->descripcion}}</td>
                                 <td style="text-align:center;vertical-align: middle; background-color:blanchedalmond ">{{$producto->stock}}</td>
-                                <td style="text-align:center;vertical-align: middle">{{$producto->precio_compra}}</td>
-                                <td style="text-align:center;vertical-align: middle">{{$producto->precio_venta}}</td>
+                                <td style="text-align:center;vertical-align: middle">$ {{ number_format($producto->precio_compra, 0, ',', '.') }}</td>
+                                <td style="text-align:center;vertical-align: middle">$ {{ number_format($producto->precio_venta, 0, ',', '.') }}</td>
                                 <td style="text-align:center;vertical-align: middle"><img src="{{asset('storage/'.$producto->imagen)}}" width="80px" alt="imagen"></td>
                                 <td style="text-align:center;vertical-align: middle">
                                     <div class="btn-group" usuario="group" aria-label="Basic example">

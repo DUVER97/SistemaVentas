@@ -392,7 +392,7 @@ return [
 
         [
             'text' => 'Proveedores',
-            'icon' => 'fas fa-fw fa-list',
+            'icon' => 'fas fa-fw fa-truck-fast',
             'classes' =>'bg-black text-white',
             'submenu' => [
                 [

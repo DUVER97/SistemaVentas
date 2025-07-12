@@ -40,7 +40,11 @@
                                 <td style="text-align:center;vertical-align: middle">{{$proveedore->telefono}}</td>
                                 <td style="text-align:center;vertical-align: middle">{{$proveedore->email}}</td>
                                 <td style="text-align:center;vertical-align: middle">{{$proveedore->nombre}}</td>
-                                <td style="text-align:center;vertical-align: middle">{{$proveedore->celular}}</td>
+                                <td style="text-align:center;vertical-align: middle">
+                                    <a href="https://wa.me/{{$empresa->codigo_postal."".$proveedore->celular}}"
+                                        class="btn btn-success" target="_blank">
+                                    {{$empresa->codigo_postal."".$proveedore->celular}}</a>
+                                </td>
                                 <td style="text-align:center;vertical-align: middle">
                                     <div class="btn-group" usuario="group" aria-label="Basic example">
                                         <a href="{{url('/admin/proveedores',$proveedore->id)}}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>

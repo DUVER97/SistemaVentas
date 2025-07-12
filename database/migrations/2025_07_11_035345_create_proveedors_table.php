@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('celular');
 
+            $table->unsignedBigInteger('empresa_id');
+
             $table->timestamps();
         });
     }
