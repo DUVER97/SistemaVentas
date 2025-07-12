@@ -403,6 +403,19 @@ return [
             ],
         ],
 
+        [
+            'text' => 'Compras',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+            'classes' =>'bg-black text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de compras',
+                    'url' => 'admin/compras',
+                    'classes' =>'bg-light text-dark',
+                ],
+            ],
+        ],
+
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',
