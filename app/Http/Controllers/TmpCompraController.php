@@ -2,21 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Compra;
 use App\Models\Producto;
-use App\Models\proveedor;
+use App\Models\TmpCompra;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CompraController extends Controller
+class TmpCompraController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public function tmp_compras(Request $request)
+    {
+        $producto = Producto::where('codigo',$request->codigo)->first();
+
+        if($producto){
+            return response()->json(['success'=>true,'message'=>'El producto fue encontrado']);
+        }else{
+            return response()->json(['success'=>false,'message'=>'producto no encontrado']);
+        }
+    }
     public function index()
     {
-        $compras = Compra::with(['producto','proveedor'])->get();
-        return view('admin.compras.index',compact('compras'));
+        //
     }
 
     /**
@@ -24,9 +32,7 @@ class CompraController extends Controller
      */
     public function create()
     {
-        $productos = Producto::where('empresa_id',Auth::user()->empresa_id)->get();
-        $proveedores = proveedor::where('empresa_id',Auth::user()->empresa_id)->get();
-        return view('admin.compras.create',compact('productos','proveedores'));
+        //
     }
 
     /**
@@ -40,7 +46,7 @@ class CompraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Compra $compra)
+    public function show(TmpCompra $tmpCompra)
     {
         //
     }
@@ -48,7 +54,7 @@ class CompraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Compra $compra)
+    public function edit(TmpCompra $tmpCompra)
     {
         //
     }
@@ -56,7 +62,7 @@ class CompraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Compra $compra)
+    public function update(Request $request, TmpCompra $tmpCompra)
     {
         //
     }
@@ -64,7 +70,7 @@ class CompraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Compra $compra)
+    public function destroy(TmpCompra $tmpCompra)
     {
         //
     }

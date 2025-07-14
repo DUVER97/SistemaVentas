@@ -42,8 +42,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success" > <i class="fas fa-save" ></i> Actualizar</button>
                                     <a href="{{url('/admin/categorias')}}" class="btn btn-secondary">Cancelar</a>
+                                    <button type="submit" class="btn btn-success" > <i class="fas fa-save" ></i> Actualizar</button>
                                 </div>
                             </div>
                         </div>
