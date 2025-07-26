@@ -15,9 +15,27 @@ class TmpCompraController extends Controller
     public function tmp_compras(Request $request)
     {
         $producto = Producto::where('codigo',$request->codigo)->first();
+        $session_id = session()->getId();
 
         if($producto){
-            return response()->json(['success'=>true,'message'=>'El producto fue encontrado']);
+
+            $tmpCompra_existe = TmpCompra::where('producto_id',$producto->id)
+                                         ->where('session_id',$session_id)->first();
+
+            if($tmpCompra_existe){
+                $tmpCompra_existe->cantidad += $request->cantidad;
+                $tmpCompra_existe->save();
+                return response()->json(['success'=>true,'message'=>'El producto fue encontrado']);
+            }else{
+                $tmpCompra = new TmpCompra();
+
+                $tmpCompra->cantidad = $request->cantidad;
+                $tmpCompra->producto_id = $producto->id;
+                $tmpCompra->session_id = $session_id;
+                $tmpCompra->save();
+                return response()->json(['success'=>true,'message'=>'El producto fue encontrado']);
+            }
+           
         }else{
             return response()->json(['success'=>false,'message'=>'producto no encontrado']);
         }
@@ -70,8 +88,9 @@ class TmpCompraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TmpCompra $tmpCompra)
+    public function destroy($id)
     {
-        //
+        TmpCompra::destroy($id);
+        return response()->json(['success'=>true]);
     }
 }
